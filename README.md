@@ -33,9 +33,14 @@ const s3Archiver = require('lambda-s3-archiver');
 
 const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path');
 console.log(result);
+```
 
-const result2 = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path', [], 'outputFile', 'zip');
-console.log(result2);
+Passing outputFilename and outputFormat as parameters.
+```
+const s3Archiver = require('lambda-s3-archiver');
+
+const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path', [], 'outputFile', 'zip');
+console.log(result);
 ```
 
 2. Archive **specified list of files** in the specified s3 sourcePath prefix.
@@ -50,7 +55,7 @@ console.log(result);
 
 Please make sure the lambda has read and write access to specifed source S3 Bucket.
 
-Sample Lambda using the lambda-s3-archiver, with Cloudformation, can be found [here](https://github.com/francismeynard/aws-archiver-service#readme).
+Sample Lambda using the lambda-s3-archiver, with Cloudformation, can be found [here](https://github.com/francismeynard/aws-journey/s3-archiver-service#readme).
 
 ## Test
 ```

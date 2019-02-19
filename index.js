@@ -51,7 +51,7 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
                 let s3Objects = await s3.listObjects({ Bucket: sourceBucket, Prefix: sourcePath }).promise();
                 console.log(`Found ${s3Objects.Contents.length} files in ${sourcePath}`);
 
-                sourceFiles = s3Objects.Contents.map(content => { content.Key });
+                sourceFiles = s3Objects.Contents.map(content => { return content.Key; });
             }
 
             console.log(sourceFiles);
