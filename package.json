@@ -1,0 +1,36 @@
+{
+    "name": "lambda-s3-archiver",
+    "version": "0.0.1",
+    "description": "This nodejs module will read and archive files in AWS S3 bucket using stream, and store the archive file in S3 as well.",
+    "main": "index.js",
+    "author": "francismeynard",
+    "license": "MIT",
+    "scripts": {
+        "test": "./node_modules/.bin/mocha --recursive --reporter spec"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/francismeynard/lambda-s3-archiver.git"
+    },
+    "homepage": "https://github.com/francismeynard/lambda-s3-archiver#readme",
+    "keywords": [
+        "aws",
+        "lambda",
+        "s3",
+        "stream",
+        "streaming",
+        "archive",
+        "archiver",
+        "zip",
+        "tar"
+    ],
+    "dependencies": {
+        "archiver": "^3.0.0"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "mocha": "^2.5.3",
+        "sinon": "^6.3.1",
+        "aws-sdk": "~2.335.0"
+    }
+}
