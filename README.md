@@ -28,34 +28,37 @@ This nodejs module will read and archive files in AWS S3 bucket using **stream**
 ## Usage
 
 1. Archive **ALL files** in the specified s3 sourcePath prefix.
-```
+
+```nodejs
 const s3Archiver = require('lambda-s3-archiver');
 
 const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path');
 console.log(result);
 ```
 
-Passing outputFilename and outputFormat as parameters.
-```
+2. Archive **ALL files** in the specified s3 sourcePath prefix by passing outputFilename and outputFormat as parameters.
+
+```nodejs
 const s3Archiver = require('lambda-s3-archiver');
 
 const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path', [], 'outputFile', 'zip');
 console.log(result);
 ```
 
-2. Archive **specified list of files** in the specified s3 sourcePath prefix.
-```
+3. Archive **specified list of files** in the specified s3 sourcePath prefix.
+
+```nodejs
 const s3Archiver = require('lambda-s3-archiver');
 
 const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path', ['files1', 'files2'], 'outputFile', 'tar');
 console.log(result);
 ```
 
-**Important**
+### Important
 
 Please make sure the lambda has read and write access to specifed source S3 Bucket.
 
-Sample Lambda using the lambda-s3-archiver, with Cloudformation, can be found [here](https://github.com/francismeynard/aws-journey/s3-archiver-service#readme).
+Sample Lambda using the lambda-s3-archiver, with Cloudformation, [can be found here](https://github.com/francismeynard/aws-journey/tree/master/sample-s3-archiver-service).
 
 ## Test
 ```
