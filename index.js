@@ -14,6 +14,7 @@ const s3 = new aws.S3();
  *                      - If not specified, all the files in sourcePath will be included in the archive
  * @param {outputFilename} - the filename of the archive file. Default to 'archive'.
  * @param {outputFormat} - the format of the archive file (zip | tar). Default to 'zip'.
+ * @param {uploadOptions} - additional options passed to s3.upload https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#upload-property
  * @return {object} - a JSON object containing the details of the archive file.
     {
         s3Bucket: 's3-bucket-name',
@@ -21,7 +22,7 @@ const s3 = new aws.S3();
         fileSize: 1024
     }
  */
-const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'archive', outputFormat = 'zip') => {
+const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'archive', outputFormat = 'zip', uploadOptions = {}) => {
     return new Promise(async (resolve, reject) => {
         try {
             const format = (['zip', 'tar'].includes(outputFormat.toLowerCase()) ? outputFormat : 'zip');
@@ -30,7 +31,14 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
             const outputFilePath = `${sourcePath}/${outputFilename}.${format}`;
             const outputStream = new PassThrough();
 
-            s3.upload({ Bucket: sourceBucket, Key: outputFilePath, Body: outputStream }, function(error, data) {
+            const params = {
+                Bucket: sourceBucket,
+                Key: outputFilePath,
+                Body: outputStream,
+                ...uploadOptions,
+            };
+
+            s3.upload(params, function(error, data) {
                 if (error) {
                     reject(error);
                 } else {
