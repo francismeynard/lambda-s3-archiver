@@ -1,6 +1,6 @@
 {
     "name": "lambda-s3-archiver",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "This nodejs module will read and archive files in AWS S3 bucket using stream, and store the archive file in S3 as well.",
     "main": "index.js",
     "author": "francismeynard",
