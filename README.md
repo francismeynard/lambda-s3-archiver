@@ -16,6 +16,7 @@ This nodejs module will read and archive files in AWS S3 bucket using **stream**
  *                      - If not specified, all the files in sourcePath will be included in the archive
  * @param {outputFilename} - the filename of the archive file. Default to 'archive'.
  * @param {outputFormat} - the format of the archive file (zip | tar). Default to 'zip'.
+ * @param {uploadOptions} - additional options passed to s3.upload https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#upload-property
  * @return {object} - a JSON object containing the details of the archive file.
     {
         s3Bucket: 's3-bucket-name',
@@ -56,9 +57,9 @@ console.log(result);
 
 ### Important
 
-Please make sure the lambda has read and write access to specifed source S3 Bucket.
+Please make sure the lambda has read and write access to the source S3 Bucket.
 
-Sample Lambda using the lambda-s3-archiver, with Cloudformation, [can be found here](https://github.com/francismeynard/aws-journey/tree/master/sample-s3-archiver-service).
+Sample Lambda using the lambda-s3-archiver, with Cloudformation, can be found in https://github.com/francismeynard/aws-journey/tree/master/sample-s3-archiver-service.
 
 ## Test
 ```
