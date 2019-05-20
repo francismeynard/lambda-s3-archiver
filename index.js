@@ -57,9 +57,9 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
             } else {
                 // Include all files in the S3 sourcePath in the archive if sourceFiles is empty
                 let s3Objects = await s3.listObjects({ Bucket: sourceBucket, Prefix: sourcePath }).promise();
-                console.log(`Found ${s3Objects.Contents.length} files in ${sourcePath}`);
 
-                sourceFiles = s3Objects.Contents.map(content => { return content.Key; });
+                sourceFiles = s3Objects.Contents.map(content => { return content.Key; }).filter(k => k != `${sourcePath}/`);
+                console.log(`Found ${sourceFiles.length} files in ${sourcePath}`);
             }
 
             console.log(sourceFiles);

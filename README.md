@@ -65,3 +65,11 @@ Sample Lambda using the lambda-s3-archiver, with Cloudformation, can be found in
 ```
 npm run test
 ```
+
+## Releases / Changelogs
+
+1.0.0 - Initial stable release
+
+1.1.0 - Added support for additional s3.upload params
+
+1.2.0 - Fixed issue on archiving ALL files in the S3 prefix/folder where the prefix is included s3.listObjects.
