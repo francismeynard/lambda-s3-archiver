@@ -73,3 +73,5 @@ npm run test
 1.1.0 - Added support for additional s3.upload params
 
 1.2.0 - Fixed issue on archiving ALL files in the S3 prefix/folder where the prefix is included s3.listObjects.
+
+1.3.0 - Added support for path with more than 1000 files.

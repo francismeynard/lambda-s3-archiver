@@ -67,7 +67,7 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
                     }
                 }
 
-                console.log(`Found ${sourceFiles.length} files in ${sourcePath}`);
+                console.log(`Found ${sourceFiles.length} total files in ${sourcePath}`);
             }
 
             console.log(sourceFiles);
