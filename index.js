@@ -55,10 +55,18 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
             if (sourceFiles && sourceFiles.length > 0) {
                 sourceFiles = sourceFiles.map(file => `${sourcePath}/${file}`);
             } else {
-                // Include all files in the S3 sourcePath in the archive if sourceFiles is empty
-                let s3Objects = await s3.listObjects({ Bucket: sourceBucket, Prefix: sourcePath }).promise();
+                var continuationToken = null
+                while (true) {
+                    // Include all files in the S3 sourcePath in the archive if sourceFiles is empty
+                    let s3Objects = await s3.listObjectsV2({ Bucket: sourceBucket, Prefix: sourcePath, ContinuationToken: continuationToken }).promise();
+                    continuationToken = s3Objects.NextContinuationToken;
+                    sourceFiles = sourceFiles.concat(s3Objects.Contents.map(content => { return content.Key; }).filter(k => k != `${sourcePath}/`));
+                    console.log(`Found ${sourceFiles.length} files in ${sourcePath}`);
+                    if (!s3Objects.IsTruncated) {
+                        break;    
+                    }
+                }
 
-                sourceFiles = s3Objects.Contents.map(content => { return content.Key; }).filter(k => k != `${sourcePath}/`);
                 console.log(`Found ${sourceFiles.length} files in ${sourcePath}`);
             }
 
