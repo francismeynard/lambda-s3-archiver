@@ -55,6 +55,15 @@ const result = await s3Archiver.archive('s3-bucket-name', 's3-prefix-path', ['fi
 console.log(result);
 ```
 
+4. Archive **ALL files** at the s3 root level (bucket name level) by passing outputFilename and outputFormat as parameters.
+
+```nodejs
+const s3Archiver = require('lambda-s3-archiver');
+
+const result = await s3Archiver.archive('s3-bucket-name', '', [], 'outputFile', 'zip');
+console.log(result);
+```
+
 ### Important
 
 Please make sure the lambda has read and write access to the source S3 Bucket.
