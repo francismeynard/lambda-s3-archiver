@@ -28,7 +28,7 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
             const format = (['zip', 'tar'].includes(outputFormat.toLowerCase()) ? outputFormat : 'zip');
             const streamArchiver = archiver(format);
 
-            const outputFilePath = `${sourcePath}/${outputFilename}.${format}`;
+            const outputFilePath = sourcePath ? `${sourcePath}/${outputFilename}.${format}` : `${outputFilename}.${format}`;
             const outputStream = new PassThrough();
 
             const params = {
@@ -53,7 +53,7 @@ const archive = (sourceBucket, sourcePath, sourceFiles = [], outputFilename = 'a
             streamArchiver.pipe(outputStream);
 
             if (sourceFiles && sourceFiles.length > 0) {
-                sourceFiles = sourceFiles.map(file => `${sourcePath}/${file}`);
+                sourceFiles = sourceFiles.map(file => sourcePath ? `${sourcePath}/${file}` : `${file}`);
             } else {
                 var continuationToken = null
                 while (true) {
